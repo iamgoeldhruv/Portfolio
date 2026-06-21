@@ -817,6 +817,12 @@ interface Experience {
   badgeClass?: string;
   bullets: ReactNode[];
 }
+type ContactForm = {
+  name: string;
+  email: string;
+  projectType: string;
+  message: string;
+};
 
 interface ExpCardProps {
   e: Experience;
@@ -866,8 +872,38 @@ function ExpCard({ e }: ExpCardProps) {
 
 export default function Portfolio() {
   const [scrolled, setScrolled] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [form, setForm] = useState<ContactForm>({
+    name: "",
+    email: "",
+    projectType: "",
+    message: "",
+  });
 
+  const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
+  const handleSubmit = async () => {
+    if (!form.name || !form.email || !form.projectType || !form.message) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    setLoading(true);
+    setSent(true);
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+    } catch (error) {
+      console.error(error);
+      return;
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", fn);
@@ -1250,21 +1286,51 @@ export default function Portfolio() {
             ) : (
               <div className="form">
                 <div className="form-row">
-                  <input className="finput" placeholder="Your name" />
-                  <input className="finput" placeholder="Email address" />
+                  <input
+                    className="finput"
+                    placeholder="Your name"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  />
+
+                  <input
+                    className="finput"
+                    placeholder="Email address"
+                    type="email"
+                    value={form.email}
+                    onChange={(e) =>
+                      setForm({ ...form, email: e.target.value })
+                    }
+                  />
                 </div>
+
                 <input
                   className="finput"
                   placeholder="Project type (e.g. RAG pipeline, scraper, full-stack MVP)"
+                  value={form.projectType}
+                  onChange={(e) =>
+                    setForm({ ...form, projectType: e.target.value })
+                  }
                 />
+
                 <textarea
                   className="ftarea"
                   rows={5}
                   placeholder="Describe what you need — the more detail, the better my estimate will be."
+                  value={form.message}
+                  onChange={(e) =>
+                    setForm({ ...form, message: e.target.value })
+                  }
                 />
-                <button className="fsend" onClick={() => setSent(true)}>
-                  Send message →
+
+                <button
+                  className="fsend"
+                  onClick={handleSubmit}
+                  disabled={loading}
+                >
+                  {loading ? "Sending..." : "Send message →"}
                 </button>
+
                 <div className="fnote">
                   No commitment. Scope estimate within 24h.
                 </div>
