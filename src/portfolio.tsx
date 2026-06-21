@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect, type ReactNode} from "react";
 
 const VIOLET = "#7C3AED";
 const VIOLET_LIGHT = "#A78BFA";
@@ -508,7 +508,7 @@ function Typer() {
   const [txt, setTxt] = useState("");
   useEffect(() => {
     const cur = TYPED[li];
-    let t;
+    let t: ReturnType<typeof setTimeout>;
     if (!del && ci < cur.length) t = setTimeout(() => { setTxt(cur.slice(0,ci+1)); setCi(c=>c+1); }, 50);
     else if (!del && ci===cur.length) t = setTimeout(() => setDel(true), 2000);
     else if (del && ci > 0) t = setTimeout(() => { setTxt(cur.slice(0,ci-1)); setCi(c=>c-1); }, 22);
@@ -639,23 +639,48 @@ const services = [
 
 const marqueeItems = ["Python","FastAPI","Elasticsearch","React","LangChain","Redis Streams","Temporal","Playwright","Docker","MongoDB","TypeScript","Spring Boot","Node.js","RAG Pipelines","Kubernetes","GraphQL"];
 
-function ExpCard({ e }) {
+interface Experience {
+  role: string;
+  company: string;
+  period: string;
+  badge?: string;
+  badgeClass?: string;
+  bullets: ReactNode[];
+}
+
+interface ExpCardProps {
+  e: Experience;
+}
+
+function ExpCard({ e }: ExpCardProps) {
   const [open, setOpen] = useState(false);
+
   return (
-    <div className={`exp-card${open?" open":""}`} onClick={()=>setOpen(o=>!o)}>
+    <div
+      className={`exp-card${open ? " open" : ""}`}
+      onClick={() => setOpen(o => !o)}
+    >
       <div className="exp-top">
         <div>
           <div className="exp-role">{e.role}</div>
           <div className="exp-co">{e.company}</div>
         </div>
+
         <div className="exp-right">
           <span className="exp-period">{e.period}</span>
-          {e.badge && <span className={`exp-badge${e.badgeClass?" "+e.badgeClass:""}`}>{e.badge}</span>}
+          {e.badge && (
+            <span
+              className={`exp-badge${e.badgeClass ? " " + e.badgeClass : ""}`}
+            >
+              {e.badge}
+            </span>
+          )}
         </div>
       </div>
+
       {open && (
         <div className="exp-body">
-          {e.bullets.map((b,i)=>(
+          {e.bullets.map((b: ReactNode, i: number) => (
             <div className="exp-bullet" key={i}>
               <span className="exp-arr">→</span>
               <span>{b}</span>
@@ -663,7 +688,8 @@ function ExpCard({ e }) {
           ))}
         </div>
       )}
-      <div className="exp-toggle">{open?"collapse ↑":"expand ↓"}</div>
+
+      <div className="exp-toggle">{open ? "collapse ↑" : "expand ↓"}</div>
     </div>
   );
 }
@@ -678,7 +704,7 @@ export default function Portfolio() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  const goto = id => document.getElementById(id)?.scrollIntoView({ behavior:"smooth" });
+  const goto = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior:"smooth" });
 
   const doubled = [...marqueeItems, ...marqueeItems];
 
