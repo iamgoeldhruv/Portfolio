@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect} from "react";
 
 const VIOLET = "#7C3AED";
 const VIOLET_LIGHT = "#A78BFA";
