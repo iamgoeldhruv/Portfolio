@@ -1,4 +1,4 @@
-import { useState, useEffect, type ReactNode} from "react";
+import { useState, useEffect, type ReactNode } from "react";
 
 const VIOLET = "#7C3AED";
 const VIOLET_LIGHT = "#A78BFA";
@@ -284,7 +284,7 @@ const styles = `
 
   /* ── SERVICES ── */
   .services-section { background:${SURFACE}; border-top:1px solid ${BORDER}; border-bottom:1px solid ${BORDER}; }
-  .services-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:${BORDER}; }
+  .services-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:${BORDER}; }
   .service-card {
     background:${BG}; padding:36px 32px; position:relative;
     transition:background 0.25s; overflow:hidden;
@@ -497,7 +497,7 @@ const TYPED = [
   "building scalable backends...",
   "shipping AI pipelines...",
   "indexing with Elasticsearch...",
-  "automating lead generation...",
+  "automating workflows with agentic AI",
   "ready for your project.",
 ];
 
@@ -509,10 +509,22 @@ function Typer() {
   useEffect(() => {
     const cur = TYPED[li];
     let t: ReturnType<typeof setTimeout>;
-    if (!del && ci < cur.length) t = setTimeout(() => { setTxt(cur.slice(0,ci+1)); setCi(c=>c+1); }, 50);
-    else if (!del && ci===cur.length) t = setTimeout(() => setDel(true), 2000);
-    else if (del && ci > 0) t = setTimeout(() => { setTxt(cur.slice(0,ci-1)); setCi(c=>c-1); }, 22);
-    else if (del && ci===0) { setDel(false); setLi(i=>(i+1)%TYPED.length); }
+    if (!del && ci < cur.length)
+      t = setTimeout(() => {
+        setTxt(cur.slice(0, ci + 1));
+        setCi((c) => c + 1);
+      }, 50);
+    else if (!del && ci === cur.length)
+      t = setTimeout(() => setDel(true), 2000);
+    else if (del && ci > 0)
+      t = setTimeout(() => {
+        setTxt(cur.slice(0, ci - 1));
+        setCi((c) => c - 1);
+      }, 22);
+    else if (del && ci === 0) {
+      setDel(false);
+      setLi((i) => (i + 1) % TYPED.length);
+    }
     return () => clearTimeout(t);
   }, [ci, del, li]);
   return (
@@ -525,14 +537,59 @@ function Typer() {
 }
 
 const skillRows = [
-  { cat: "Languages", tags: ["C++", "Python", "Java", "JavaScript", "TypeScript"], cls: "skill-row-5" },
-  { cat: "Backend", tags: ["FastAPI", "Django-DRF", "Spring Boot", "Node.js", "Express", "WebSockets"], cls: "skill-row-6" },
-  { cat: "Frontend", tags: ["React", "Next.js", "Angular", "Tailwind CSS"], cls: "skill-row-4" },
-  { cat: "AI / ML", tags: ["LangChain", "RAG", "Ollama", "OCR", "Tesseract"], cls: "skill-row-5" },
-  { cat: "Databases", tags: ["MongoDB", "PostgreSQL", "MySQL", "Oracle SQL", "Redis"], cls: "skill-row-5" },
-  { cat: "Infra", tags: ["Docker", "Kubernetes", "Elasticsearch", "Redis Streams", "Temporal"], cls: "skill-row-5" },
-  { cat: "Tools", tags: ["Git", "Playwright", "GraphQL", "Prisma", "Blockchain"], cls: "skill-row-5" },
-  { cat: "CS Cores", tags: ["System Design", "DSA 800+", "OOPS", "DBMS", "Networking"], cls: "skill-row-5" },
+  {
+    cat: "Languages",
+    tags: ["C++", "Python", "Java", "JavaScript", "TypeScript"],
+    cls: "skill-row-5",
+  },
+  {
+    cat: "Backend",
+    tags: [
+      "FastAPI",
+      "Django-DRF",
+      "Spring Boot",
+      "Node.js",
+      "Express",
+      "WebSockets",
+    ],
+    cls: "skill-row-6",
+  },
+  {
+    cat: "Frontend",
+    tags: ["React", "Next.js", "Angular", "Tailwind CSS"],
+    cls: "skill-row-4",
+  },
+  {
+    cat: "AI / ML",
+    tags: ["LangChain", "RAG", "Ollama", "OCR", "Tesseract"],
+    cls: "skill-row-5",
+  },
+  {
+    cat: "Databases",
+    tags: ["MongoDB", "PostgreSQL", "MySQL", "Oracle SQL", "Redis"],
+    cls: "skill-row-5",
+  },
+  {
+    cat: "Infra",
+    tags: [
+      "Docker",
+      "Kubernetes",
+      "Elasticsearch",
+      "Redis Streams",
+      "Temporal",
+    ],
+    cls: "skill-row-5",
+  },
+  {
+    cat: "Tools",
+    tags: ["Git", "Playwright", "GraphQL", "Prisma", "Blockchain"],
+    cls: "skill-row-5",
+  },
+  {
+    cat: "CS Cores",
+    tags: ["System Design", "DSA 800+", "OOPS", "DBMS", "Networking"],
+    cls: "skill-row-5",
+  },
 ];
 
 const experiences = [
@@ -542,10 +599,26 @@ const experiences = [
     period: "Aug 2025 – Present",
     badge: "Current",
     bullets: [
-      <><strong>Architected 3-service microservice system</strong> (Tool-Core, Intent Engine, Profiler) automating entire manual lead-generation pipeline with Python, FastAPI, MongoDB, Redis Streams + Temporal.</>,
-      <><strong>Config-driven universal scraper</strong> (Python + Playwright) — cut onboarding for new websites by <strong>5×</strong>, eliminated all repeated custom-scraper development.</>,
-      <><strong>Agentic workflow engine</strong> converts plain-English business requirements into executable AI-driven lead strategies via Temporal orchestration.</>,
-      <>Designed <strong>fault-tolerant real-time pipeline</strong> with retry handling and guaranteed message delivery for high-throughput enrichment at scale.</>,
+      <>
+        <strong>Architected 3-service microservice system</strong> (Tool-Core,
+        Intent Engine, Profiler) automating entire manual lead-generation
+        pipeline with Python, FastAPI, MongoDB, Redis Streams + Temporal.
+      </>,
+      <>
+        <strong>Config-driven universal scraper</strong> (Python + Playwright) —
+        cut onboarding for new websites by <strong>5×</strong>, eliminated all
+        repeated custom-scraper development.
+      </>,
+      <>
+        <strong>Agentic workflow engine</strong> converts plain-English business
+        requirements into executable AI-driven lead strategies via Temporal
+        orchestration.
+      </>,
+      <>
+        Designed <strong>fault-tolerant real-time pipeline</strong> with retry
+        handling and guaranteed message delivery for high-throughput enrichment
+        at scale.
+      </>,
     ],
   },
   {
@@ -555,9 +628,19 @@ const experiences = [
     badge: "PPO Received",
     badgeClass: "ppo",
     bullets: [
-      <><strong>Elasticsearch search layer</strong> across PDFs, HTML pages, and videos — reduced retrieval latency from <strong>minutes to seconds</strong>.</>,
-      <>Full-stack content management (Angular + Spring Boot + Oracle SQL) reducing manual effort by <strong>&gt;80%</strong>.</>,
-      <><strong>Pre-Placement Offer</strong> received based on performance — joining full-time.</>,
+      <>
+        <strong>Elasticsearch search layer</strong> across PDFs, HTML pages, and
+        videos — reduced retrieval latency from{" "}
+        <strong>minutes to seconds</strong>.
+      </>,
+      <>
+        Full-stack content management (Angular + Spring Boot + Oracle SQL)
+        reducing manual effort by <strong>&gt;80%</strong>.
+      </>,
+      <>
+        <strong>Pre-Placement Offer</strong> received based on performance —
+        joining full-time.
+      </>,
     ],
   },
   {
@@ -567,7 +650,11 @@ const experiences = [
     badge: "Contract",
     bullets: [
       <>Improved CLI usability for node and context management tooling.</>,
-      <>Proposed and implemented <strong>macro-based transport abstraction</strong> to simplify multi-protocol blockchain transport declaration.</>,
+      <>
+        Proposed and implemented{" "}
+        <strong>macro-based transport abstraction</strong> to simplify
+        multi-protocol blockchain transport declaration.
+      </>,
     ],
   },
   {
@@ -576,7 +663,11 @@ const experiences = [
     period: "Apr – May 2025",
     badge: "Contract",
     bullets: [
-      <>Migrated REST APIs to <strong>WebSocket-based real-time communication</strong> in Node.js — eliminated polling, instant server-to-client push.</>,
+      <>
+        Migrated REST APIs to{" "}
+        <strong>WebSocket-based real-time communication</strong> in Node.js —
+        eliminated polling, instant server-to-client push.
+      </>,
     ],
   },
   {
@@ -585,33 +676,44 @@ const experiences = [
     period: "Mar 2023 – Present",
     badge: "Leadership",
     bullets: [
-      <>Leading <strong>Chakra CMS</strong> powering <strong>13,000+ web pages</strong> for IIT Roorkee on React + Django-DRF + MySQL.</>,
-      <>Implemented caching strategies, built reusable components, resolved critical production issues.</>,
+      <>
+        Leading <strong>Chakra CMS</strong> powering{" "}
+        <strong>13,000+ web pages</strong> for IIT Roorkee on React + Django-DRF
+        + MySQL.
+      </>,
+      <>
+        Implemented caching strategies, built reusable components, resolved
+        critical production issues.
+      </>,
     ],
   },
 ];
 
 const projects = [
   {
-    icon: "🔍", name: "MedLens AI",
+    icon: "🔍",
+    name: "MedLens AI",
     desc: "Healthcare document QA system. Extracts insights from complex medical PDFs via OCR + semantic chunking + RAG. Custom LangChain pipeline with Ollama LLM for accurate multi-document answers.",
     win: "🏆 1st Runner-Up · HiLabs AI Quest 2025",
     stack: ["OCR", "LangChain", "RAG", "Ollama", "Tesseract", "Python"],
     link: "https://bit.ly/Medlens_AI",
   },
   {
-    icon: "⚙️", name: "Universal Web Scraper",
+    icon: "⚙️",
+    name: "Universal Web Scraper",
     desc: "Config-driven scraping framework built at Recepto.ai. Zero custom-scraper code — any forum or listing site scraped from a JSON config. Rate-limit safe, fault-tolerant, Redis-backed delivery.",
     stack: ["Python", "Playwright", "FastAPI", "Redis Streams", "MongoDB"],
   },
   {
-    icon: "🌐", name: "Chakra CMS",
+    icon: "🌐",
+    name: "Chakra CMS",
     desc: "Large-scale content management system serving 13,000+ pages for IIT Roorkee. Built reusable component library, caching layer, resolved critical production incidents on distributed stack.",
     stack: ["React", "Django-DRF", "MySQL", "Python"],
     link: "https://bit.ly/Chakra",
   },
   {
-    icon: "📊", name: "Smart Lab Report",
+    icon: "📊",
+    name: "Smart Lab Report",
     desc: "Full-stack lab report analyzer with AI-driven health advice, interactive visualizations, and offline PDF access. Built and deployed solo end-to-end.",
     win: "🏆 1st Place · IMG IITR Hackathon 2024",
     stack: ["React", "Node.js", "Express", "MongoDB Atlas"],
@@ -621,23 +723,91 @@ const projects = [
 
 const achievements = [
   { icon: "🎓", title: "IIT Roorkee", sub: "ECE · GPA 7.944 · 2026", n: "01" },
-  { icon: "📈", title: "JEE Advanced AIR 4757", sub: "Top 3.2% of 150,000+", n: "02" },
+  {
+    icon: "📈",
+    title: "JEE Advanced AIR 4757",
+    sub: "Top 3.2% of 150,000+",
+    n: "02",
+  },
   { icon: "🏅", title: "JEE Main 99.18%ile", sub: "Top 0.82% of 1M+", n: "03" },
-  { icon: "🌍", title: "CF Global Rank 771", sub: "Round 1011 Div.2 · 25K+ contestants", n: "04" },
-  { icon: "🥇", title: "Hackathon Winner", sub: "BREAK-A-SPHERE · IMG IIT Roorkee", n: "05" },
-  { icon: "🥈", title: "1st Runner-Up", sub: "AI Quest · HiLabs 2025", n: "06" },
-  { icon: "⚡", title: "CF Specialist 1544", sub: "Handle: pommpomms", n: "07" },
-  { icon: "💻", title: "800+ Problems", sub: "LeetCode + InterviewBit", n: "08" },
+  {
+    icon: "🌍",
+    title: "CF Global Rank 771",
+    sub: "Round 1011 Div.2 · 25K+ contestants",
+    n: "04",
+  },
+  {
+    icon: "🥇",
+    title: "Hackathon Winner",
+    sub: "BREAK-A-SPHERE · IMG IIT Roorkee",
+    n: "05",
+  },
+  {
+    icon: "🥈",
+    title: "1st Runner-Up",
+    sub: "AI Quest · HiLabs 2025",
+    n: "06",
+  },
+  {
+    icon: "⚡",
+    title: "CF Specialist 1544",
+    sub: "Handle: pommpomms",
+    n: "07",
+  },
+  {
+    icon: "💻",
+    title: "800+ Problems",
+    sub: "LeetCode + InterviewBit",
+    n: "08",
+  },
 ];
 
 const services = [
-  { n:"01", title:"AI / RAG Pipeline", desc:"End-to-end document QA, semantic search, or LLM integration. LangChain, Ollama, vector DBs, OCR. Delivered as a production API.", price:"From $600 · 2 weeks" },
-  { n:"02", title:"Web Scraping System", desc:"Config-driven or custom scrapers for any site. Extraction, transformation, and delivery pipelines. Playwright, Python, rate-limit safe.", price:"From $400 · 1 week" },
-  { n:"03", title:"Search Infrastructure", desc:"Elasticsearch across documents, HTML, and media. Fast, relevant, scalable. Direct enterprise-grade experience from SLB.", price:"From $500 · 1–2 weeks" },
-  { n:"04", title:"Full-Stack MVP", desc:"React + Node/Django + MongoDB/PostgreSQL. From wireframe to deployed product. TypeScript, clean APIs, production-ready.", price:"From $800 · 3 weeks" },
+  {
+    n: "01",
+    title: "AI Agents & Automation",
+    desc: "Custom AI agents that automate research, data processing, content workflows, and business operations. Built with modern LLMs, tool integrations, and scalable orchestration frameworks.",
+  },
+  {
+    n: "02",
+    title: "AI / RAG Systems",
+    desc: "Production-ready Retrieval-Augmented Generation systems with semantic search, vector databases, document processing, OCR, and LLM integration for accurate knowledge retrieval.",
+  },
+  {
+    n: "03",
+    title: "Search Infrastructure",
+    desc: "High-performance search solutions using Elasticsearch and vector search. Design, indexing, ranking, and optimization for documents, websites, and enterprise-scale datasets.",
+  },
+  {
+    n: "04",
+    title: "Distributed Systems & Backend Engineering",
+    desc: "Scalable backend architectures, microservices, APIs, workflow orchestration, message queues, caching, and cloud-native systems built for reliability and performance.",
+  },
+  {
+    n: "05",
+    title: "Full-Stack Product Development",
+    desc: "End-to-end web applications using React, Next.js, Node.js, Django, PostgreSQL, and MongoDB. From MVP development to production deployment with clean, maintainable code.",
+  },
 ];
 
-const marqueeItems = ["Python","FastAPI","Elasticsearch","React","LangChain","Redis Streams","Temporal","Playwright","Docker","MongoDB","TypeScript","Spring Boot","Node.js","RAG Pipelines","Kubernetes","GraphQL"];
+const marqueeItems = [
+  "Python",
+  "FastAPI",
+  "Elasticsearch",
+  "React",
+  "LangChain",
+  "Redis Streams",
+  "Temporal",
+  "Playwright",
+  "Docker",
+  "MongoDB",
+  "TypeScript",
+  "Spring Boot",
+  "Node.js",
+  "RAG Pipelines",
+  "Kubernetes",
+  "GraphQL",
+];
 
 interface Experience {
   role: string;
@@ -658,7 +828,7 @@ function ExpCard({ e }: ExpCardProps) {
   return (
     <div
       className={`exp-card${open ? " open" : ""}`}
-      onClick={() => setOpen(o => !o)}
+      onClick={() => setOpen((o) => !o)}
     >
       <div className="exp-top">
         <div>
@@ -704,7 +874,8 @@ export default function Portfolio() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  const goto = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior:"smooth" });
+  const goto = (id: string) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   const doubled = [...marqueeItems, ...marqueeItems];
 
@@ -713,85 +884,161 @@ export default function Portfolio() {
       <style>{styles}</style>
 
       {/* NAV */}
-      <nav className={`nav${scrolled?" scrolled":""}`}>
-        <div className="nav-logo grotesk">dhruv<span>.</span>dev</div>
-        <div className="nav-center">
-          {["skills","services","experience","projects","contact"].map(s=>(
-            <a key={s} className="nav-link" onClick={()=>goto(s)}>{s}</a>
-          ))}
+      <nav className={`nav${scrolled ? " scrolled" : ""}`}>
+        <div className="nav-logo grotesk">
+          dhruv<span>.</span>dev
         </div>
-        <button className="nav-cta" onClick={()=>goto("contact")}>Hire me →</button>
+        <div className="nav-center">
+          {["skills", "services", "experience", "projects", "contact"].map(
+            (s) => (
+              <a key={s} className="nav-link" onClick={() => goto(s)}>
+                {s}
+              </a>
+            ),
+          )}
+        </div>
+        <button className="nav-cta" onClick={() => goto("contact")}>
+          Hire me →
+        </button>
       </nav>
 
       {/* HERO */}
       <section className="hero" id="hero">
-        <div className="hero-grid-bg"/>
-        <div className="hero-glow"/>
-        <div className="hero-glow2"/>
+        <div className="hero-grid-bg" />
+        <div className="hero-glow" />
+        <div className="hero-glow2" />
         <div className="hero-layout">
           <div>
             <div className="hero-eyebrow">
-              <span className="hero-dot"/>
-              Available for freelance · Remote worldwide
+              <span className="hero-dot" />
+              Available for freelance/full-time work.
             </div>
             <h1 className="hero-h1 grotesk">
-              <span className="hero-h1-grad">Backend &amp;<br/>AI Systems</span><br/>
+              <span className="hero-h1-grad">
+                Backend , devops &amp;
+                <br />
+                AI Systems
+              </span>
+              <br />
               Engineer.
             </h1>
-            <Typer/>
+            <Typer />
             <p className="hero-desc">
-              IIT Roorkee ECE · Incoming SDE at <strong>Schlumberger (SLB)</strong>.<br/>
-              I build <strong>production-grade backends, AI pipelines, and search systems</strong> that ship fast and scale reliably.
+              SDE at <strong>Recepto.ai</strong> Incoming SDE at{" "}
+              <strong>Schlumberger (SLB)</strong>.Grad IIT Roorkee ECE
+              <br />I build{" "}
+              <strong>
+                production-grade backends, AI pipelines, and search systems
+              </strong>{" "}
+              that ship fast and scale reliably.
             </p>
             <div className="hero-actions">
-              <button className="btn-primary" onClick={()=>goto("contact")}>Start a project →</button>
-              <button className="btn-outline" onClick={()=>goto("projects")}>View work</button>
+              <button className="btn-primary" onClick={() => goto("contact")}>
+                Start a project →
+              </button>
+              <button className="btn-outline" onClick={() => goto("projects")}>
+                View work
+              </button>
             </div>
           </div>
           {/* Orbit visual */}
           <div className="hero-visual">
-            <div className="orbit-ring orbit-r1"/>
-            <div className="orbit-ring orbit-r2"/>
+            <div className="orbit-ring orbit-r1" />
+            <div className="orbit-ring orbit-r2" />
             <div className="orbit-center">⚡</div>
-            <div className="orbit-node orbit-n1" style={{fontSize:11}}>PY</div>
-            <div className="orbit-node orbit-n2" style={{fontSize:11}}>ES</div>
-            <div className="orbit-node orbit-n3" style={{fontSize:11}}>AI</div>
-            <div className="orbit-node orbit-n4" style={{fontSize:10,borderRadius:"50%",width:28,height:28}}>RX</div>
-            <div className="orbit-node orbit-n5" style={{fontSize:10,borderRadius:"50%",width:28,height:28}}>K8</div>
+            <div className="orbit-node orbit-n1" style={{ fontSize: 11 }}>
+              PY
+            </div>
+            <div className="orbit-node orbit-n2" style={{ fontSize: 11 }}>
+              ES
+            </div>
+            <div className="orbit-node orbit-n3" style={{ fontSize: 11 }}>
+              AI
+            </div>
+            <div
+              className="orbit-node orbit-n4"
+              style={{
+                fontSize: 10,
+                borderRadius: "50%",
+                width: 28,
+                height: 28,
+              }}
+            >
+              RX
+            </div>
+            <div
+              className="orbit-node orbit-n5"
+              style={{
+                fontSize: 10,
+                borderRadius: "50%",
+                width: 28,
+                height: 28,
+              }}
+            >
+              K8
+            </div>
           </div>
         </div>
         {/* Stats */}
         <div className="hero-stats-bar">
-          <div className="stat-item"><div className="stat-num grotesk">3<em>+</em></div><div className="stat-lbl">Industry internships</div></div>
-          <div className="stat-item"><div className="stat-num grotesk">5<em>×</em></div><div className="stat-lbl">Faster scraper onboarding</div></div>
-          <div className="stat-item"><div className="stat-num grotesk">&gt;80<em>%</em></div><div className="stat-lbl">Manual effort cut at SLB</div></div>
-          <div className="stat-item"><div className="stat-num grotesk">800<em>+</em></div><div className="stat-lbl">DSA problems solved</div></div>
+          <div className="stat-item">
+            <div className="stat-num grotesk">
+              3<em>+</em>
+            </div>
+            <div className="stat-lbl">Industry internships</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-num grotesk">
+              5<em>×</em>
+            </div>
+            <div className="stat-lbl">Faster scraper onboarding</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-num grotesk">
+              &gt;80<em>%</em>
+            </div>
+            <div className="stat-lbl">Manual effort cut at SLB</div>
+          </div>
+          <div className="stat-item">
+            <div className="stat-num grotesk">
+              800<em>+</em>
+            </div>
+            <div className="stat-lbl">DSA problems solved</div>
+          </div>
         </div>
       </section>
 
       {/* MARQUEE */}
       <div className="marquee-wrap">
         <div className="marquee-track">
-          {doubled.map((t,i)=>(
-            <span className="marquee-item" key={i}>{t}</span>
+          {doubled.map((t, i) => (
+            <span className="marquee-item" key={i}>
+              {t}
+            </span>
           ))}
         </div>
       </div>
 
       {/* SKILLS */}
-      <section className="skills-section" id="skills" style={{borderTop:`1px solid ${BORDER}`,background:SURFACE}}>
+      <section
+        className="skills-section"
+        id="skills"
+        style={{ borderTop: `1px solid ${BORDER}`, background: SURFACE }}
+      >
         <div className="skills-header">
           <div className="sec-label">Technical stack</div>
           <h2 className="sec-title grotesk">Tools I ship with</h2>
-          <p className="sec-sub">Every entry here has been used in production. No fluff.</p>
+          <p className="sec-sub">
+            Have real hands on experience with these technologies.
+          </p>
         </div>
         <div className="skills-strips">
-          {skillRows.map(row=>(
+          {skillRows.map((row) => (
             <div className={`skill-row ${row.cls}`} key={row.cat}>
               <div className="skill-row-cat">{row.cat}</div>
-              {row.tags.map(t=>(
+              {row.tags.map((t) => (
                 <div className="skill-cell" key={t}>
-                  <span className="skill-dot"/>
+                  <span className="skill-dot" />
                   {t}
                 </div>
               ))}
@@ -804,14 +1051,15 @@ export default function Portfolio() {
       <section className="section services-section" id="services">
         <div className="sec-label">What I offer</div>
         <h2 className="sec-title grotesk">Productized services</h2>
-        <p className="sec-sub">Fixed scope. Fixed price. You know exactly what you're getting and when.</p>
+        <p className="sec-sub">
+          Hit me up for any of these requirements or similar projects.
+        </p>
         <div className="services-grid">
-          {services.map(s=>(
+          {services.map((s) => (
             <div className="service-card" key={s.n}>
               <div className="svc-num mono">{s.n} ——</div>
               <div className="svc-title grotesk">{s.title}</div>
               <div className="svc-desc">{s.desc}</div>
-              <div className="svc-price mono">{s.price}</div>
             </div>
           ))}
         </div>
@@ -823,10 +1071,14 @@ export default function Portfolio() {
           <div className="exp-sidebar">
             <div className="sec-label">Work history</div>
             <h2 className="sec-title grotesk">Where I've shipped</h2>
-            <p className="sec-sub">Click any role to expand. Everything here is production work.</p>
+            <p className="sec-sub">
+              Click any role to expand. Everything here is production work.
+            </p>
           </div>
           <div className="exp-list">
-            {experiences.map((e,i)=><ExpCard e={e} key={i}/>)}
+            {experiences.map((e, i) => (
+              <ExpCard e={e} key={i} />
+            ))}
           </div>
         </div>
       </section>
@@ -835,31 +1087,54 @@ export default function Portfolio() {
       <section className="section projects-section" id="projects">
         <div className="sec-label">Selected projects</div>
         <h2 className="sec-title grotesk">Things I've built</h2>
-        <p className="sec-sub">Hackathon wins, open-source tools, and production systems used daily.</p>
+        <p className="sec-sub">
+          Hackathon wins, open-source tools, and production systems used daily.
+        </p>
         <div className="projects-grid">
-          {projects.map((p,i)=>(
+          {projects.map((p, i) => (
             <div className="proj-card" key={i}>
-              <div className="proj-glow"/>
+              <div className="proj-glow" />
               <div className="proj-top">
                 <div className="proj-icon">{p.icon}</div>
-                {p.link && <a className="proj-link" href={p.link} target="_blank" rel="noreferrer">↗ view</a>}
+                {p.link && (
+                  <a
+                    className="proj-link"
+                    href={p.link}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    ↗ view
+                  </a>
+                )}
               </div>
               <div className="proj-name grotesk">{p.name}</div>
               <div className="proj-desc">{p.desc}</div>
               {p.win && <div className="proj-win">{p.win}</div>}
-              <div className="proj-stack">{p.stack.map(t=><span className="stk-tag" key={t}>{t}</span>)}</div>
+              <div className="proj-stack">
+                {p.stack.map((t) => (
+                  <span className="stk-tag" key={t}>
+                    {t}
+                  </span>
+                ))}
+              </div>
             </div>
           ))}
         </div>
       </section>
 
       {/* ACHIEVEMENTS */}
-      <section className="section ach-section" id="achievements" style={{background:SURFACE,borderTop:`1px solid ${BORDER}`}}>
+      <section
+        className="section ach-section"
+        id="achievements"
+        style={{ background: SURFACE, borderTop: `1px solid ${BORDER}` }}
+      >
         <div className="sec-label">Background</div>
         <h2 className="sec-title grotesk">Credentials &amp; milestones</h2>
-        <p className="sec-sub">Competitive programming, elite academics, and hackathon podiums.</p>
+        <p className="sec-sub">
+          Competitive programming, elite academics, and hackathon podiums.
+        </p>
         <div className="ach-grid">
-          {achievements.map((a,i)=>(
+          {achievements.map((a, i) => (
             <div className="ach-card" key={i}>
               <div className="ach-num">{a.n}</div>
               <div className="ach-icon">{a.icon}</div>
@@ -875,50 +1150,124 @@ export default function Portfolio() {
         <div className="contact-layout">
           <div>
             <div className="sec-label">Get in touch</div>
-            <h2 className="sec-title grotesk">Let's build<br/>something real.</h2>
-            <div className="avail-pill"><span className="avail-dot"/>&nbsp;Open to freelance · 1–2 spots/month</div>
-            <p style={{fontSize:15,color:MUTED,lineHeight:1.75,marginBottom:8}}>
-              I take on freelance projects alongside my full-time role at SLB. Response within 24 hours. No commitment to reach out.
+            <h2 className="sec-title grotesk">
+              Let's build
+              <br />
+              something real.
+            </h2>
+            <div className="avail-pill">
+              <span className="avail-dot" />
+              &nbsp;Open to freelance · 1–2 spots/month
+            </div>
+            <p
+              style={{
+                fontSize: 15,
+                color: MUTED,
+                lineHeight: 1.75,
+                marginBottom: 8,
+              }}
+            >
+              Open for full time as well as freelance opportunities.
             </p>
             <div className="contact-links">
               <a className="c-link" href="mailto:goeldhruv9876@gmail.com">
                 <span className="c-link-icon">✉</span>
-                <div><div>goeldhruv9876@gmail.com</div><div className="c-link-sub">Email · fastest response</div></div>
+                <div>
+                  <div>goeldhruv9876@gmail.com</div>
+                  <div className="c-link-sub">Email · fastest response</div>
+                </div>
               </a>
-              <a className="c-link" href="https://linkedin.com/in/dhruv-goel-430384252" target="_blank" rel="noreferrer">
+              <a
+                className="c-link"
+                href="https://linkedin.com/in/dhruv-goel-430384252"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <span className="c-link-icon">in</span>
-                <div><div>linkedin.com/in/dhruv-goel-430384252</div><div className="c-link-sub">LinkedIn</div></div>
+                <div>
+                  <div>linkedin.com/in/dhruv-goel-430384252</div>
+                  <div className="c-link-sub">LinkedIn</div>
+                </div>
               </a>
-              <a className="c-link" href="https://github.com/iamgoeldhruv" target="_blank" rel="noreferrer">
+              <a
+                className="c-link"
+                href="https://github.com/iamgoeldhruv"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <span className="c-link-icon">⌥</span>
-                <div><div>github.com/iamgoeldhruv</div><div className="c-link-sub">GitHub · see the code</div></div>
+                <div>
+                  <div>github.com/iamgoeldhruv</div>
+                  <div className="c-link-sub">GitHub · see the code</div>
+                </div>
               </a>
               <a className="c-link" href="tel:+916307513024">
                 <span className="c-link-icon">📞</span>
-                <div><div>+91 63075 13024</div><div className="c-link-sub">WhatsApp / Call</div></div>
+                <div>
+                  <div>+91 63075 13024</div>
+                  <div className="c-link-sub">WhatsApp / Call</div>
+                </div>
               </a>
             </div>
           </div>
           <div>
-            <p style={{fontSize:13,color:MUTED,marginBottom:20,lineHeight:1.6}}>
-              Describe your project briefly — I'll reply with a scope and timeline estimate within 24 hours.
+            <p
+              style={{
+                fontSize: 13,
+                color: MUTED,
+                marginBottom: 20,
+                lineHeight: 1.6,
+              }}
+            >
+              Describe your project briefly — I'll reply with a scope and
+              timeline estimate within 24 hours.
             </p>
             {sent ? (
-              <div style={{background:"rgba(34,197,94,0.06)",border:"1px solid rgba(34,197,94,0.2)",borderRadius:12,padding:"48px 32px",textAlign:"center"}}>
-                <div style={{fontSize:40,marginBottom:16}}>✓</div>
-                <div style={{color:"#4ADE80",fontWeight:700,fontSize:18,marginBottom:8}}>Message sent!</div>
-                <div style={{fontSize:14,color:MUTED}}>I'll respond within 24 hours.</div>
+              <div
+                style={{
+                  background: "rgba(34,197,94,0.06)",
+                  border: "1px solid rgba(34,197,94,0.2)",
+                  borderRadius: 12,
+                  padding: "48px 32px",
+                  textAlign: "center",
+                }}
+              >
+                <div style={{ fontSize: 40, marginBottom: 16 }}>✓</div>
+                <div
+                  style={{
+                    color: "#4ADE80",
+                    fontWeight: 700,
+                    fontSize: 18,
+                    marginBottom: 8,
+                  }}
+                >
+                  Message sent!
+                </div>
+                <div style={{ fontSize: 14, color: MUTED }}>
+                  I'll respond within 24 hours.
+                </div>
               </div>
             ) : (
               <div className="form">
                 <div className="form-row">
-                  <input className="finput" placeholder="Your name"/>
-                  <input className="finput" placeholder="Email address"/>
+                  <input className="finput" placeholder="Your name" />
+                  <input className="finput" placeholder="Email address" />
                 </div>
-                <input className="finput" placeholder="Project type (e.g. RAG pipeline, scraper, full-stack MVP)"/>
-                <textarea className="ftarea" rows={5} placeholder="Describe what you need — the more detail, the better my estimate will be."/>
-                <button className="fsend" onClick={()=>setSent(true)}>Send message →</button>
-                <div className="fnote">No commitment. Scope estimate within 24h.</div>
+                <input
+                  className="finput"
+                  placeholder="Project type (e.g. RAG pipeline, scraper, full-stack MVP)"
+                />
+                <textarea
+                  className="ftarea"
+                  rows={5}
+                  placeholder="Describe what you need — the more detail, the better my estimate will be."
+                />
+                <button className="fsend" onClick={() => setSent(true)}>
+                  Send message →
+                </button>
+                <div className="fnote">
+                  No commitment. Scope estimate within 24h.
+                </div>
               </div>
             )}
           </div>
@@ -927,7 +1276,9 @@ export default function Portfolio() {
 
       {/* FOOTER */}
       <footer className="footer">
-        <div className="footer-l">© 2026 Dhruv Goel · IIT Roorkee · Incoming SDE @ SLB Digital</div>
+        <div className="footer-l">
+          © 2026 Dhruv Goel · IIT Roorkee · SDE @ Recepto.ai
+        </div>
         <div className="footer-r">dhruv.dev</div>
       </footer>
     </>
