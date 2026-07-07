@@ -10,8 +10,8 @@ export default async function handler(
   const { name, email, projectType, message } = req.body;
 
   await resend.emails.send({
-    from: "Portfolio <contact@yourdomain.com>",
-    to: "yourgmail@gmail.com",
+    from: "Dhruv Portfolio <contact@my.dg.portfolio.com>",
+    to: "goeldhruv9876@gmail.com",
     subject: `New Lead: ${projectType}`,
     html: `
       <p>Name: ${name}</p>
