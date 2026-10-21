@@ -191,42 +191,74 @@ export const services: ServiceItem[] = [
 
 export const experiences: ExperienceItem[] = [
   {
-    role: "Software Engineer",
-    company: "Recepto.ai",
+    role: "Full Stack Developer",
+    company: "SLB",
     period: "Aug 2025 – Present",
     badge: "Current",
     bullets: [
       {
         chunks: [
-          { text: "Architected 3-service microservice system", strong: true },
+          { text: "Building Data Workspace Infrastructure", strong: true },
           {
-            text: " (Tool-Core, Intent Engine, Profiler) automating entire manual lead-generation pipeline with Python, FastAPI, MongoDB, Redis Streams + Temporal.",
+            text: " to support scalable data workflows and reliable project collaboration.",
           },
         ],
       },
       {
         chunks: [
-          { text: "Config-driven universal scraper", strong: true },
+          { text: "Developing full-stack features", strong: true },
           {
-            text: " (Python + Playwright) — cut onboarding for new websites by ",
-          },
-          { text: "5×", strong: true },
-          { text: ", eliminated all repeated custom-scraper development." },
-        ],
-      },
-      {
-        chunks: [
-          { text: "Agentic workflow engine", strong: true },
-          {
-            text: " converts plain-English business requirements into executable AI-driven lead strategies via Temporal orchestration.",
+            text: " across the frontend, backend, and data layers for SLB project teams.",
           },
         ],
       },
       {
         chunks: [
-          { text: "Designed fault-tolerant real-time pipeline", strong: true },
+          { text: "Contributing to data workspace architecture", strong: true },
           {
-            text: " with retry handling and guaranteed message delivery for high-throughput enrichment at scale.",
+            text: " with maintainable services, integrations, and user-focused tooling.",
+          },
+        ],
+      },
+      {
+        chunks: [
+          {
+            text: "Collaborating across engineering and product teams",
+            strong: true,
+          },
+          {
+            text: " to deliver production-ready improvements to the platform.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    role: "Software Engineer",
+    company: "Recepto.ai",
+    period: "2024 – Jul 2025",
+    bullets: [
+      {
+        chunks: [
+          { text: "Built a universal web scraper", strong: true },
+          {
+            text: " using Python, Playwright, FastAPI, and Redis Streams for reliable data collection and delivery.",
+          },
+        ],
+      },
+      {
+        chunks: [
+          { text: "Designed config-driven scraping workflows", strong: true },
+          {
+            text: " that reduced custom scraper development and accelerated onboarding for new sources.",
+          },
+        ],
+      },
+      {
+        chunks: [
+          { text: "Improved fault tolerance and operational reliability", strong: true },
+          {
+            text: " with rate-limit handling, retries, and scalable backend integrations.",
           },
         ],
       },

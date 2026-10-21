@@ -36,8 +36,8 @@ export function HeroSection() {
           </div>
 
           <p className="hero-desc">
-            SDE at <strong>Recepto.ai</strong>. Incoming SDE at{" "}
-            <strong>Schlumberger (SLB)</strong>. Grad IIT Roorkee ECE
+            Full Stack Developer at <strong>SLB</strong>. Former Software Engineer at{" "}
+            <strong>Recepto.ai</strong>. Grad IIT Roorkee ECE
             <br />I build{" "}
             <strong>
               production-grade backends, AI pipelines, and search systems
